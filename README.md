@@ -1,7 +1,7 @@
-AC215-Template
+AC215-KKST
 ==============================
 
-AC215
+AC215 Project
 
 Project Organization
 ------------
