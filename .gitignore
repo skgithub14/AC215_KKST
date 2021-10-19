@@ -1,5 +1,7 @@
 # Data
 *.zip
+captions.txt
+data/Images/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
