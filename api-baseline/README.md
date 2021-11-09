@@ -8,6 +8,6 @@ Run `sh docker-shell.sh` to enter the container, and then run `uvicorn-server` t
 
 Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the `persistent-folder` in the parent directory. 
 
-There are two `/predict` server created. The first one (`/predict`) serves the transformer-based model (defined in `api/model.py`), whereas the second one (`/predict2`) serves the RNN-with-attention-based model ('api/model2.py`).
+There are two `/predict` server created. The first one (`/predict`) serves the transformer-based model (defined in `api/model.py`), whereas the second one (`/predict2`) serves the RNN-with-attention-based model (`api/model2.py`).
 
 The servers take an jpeg image as input and return a dictionary with generated caption in the `caption` key.
