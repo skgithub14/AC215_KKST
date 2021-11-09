@@ -2,6 +2,7 @@
 *.zip
 captions.txt
 data/Images/
+persistent-folder/
 
 # Security
 secrets/
