@@ -5,8 +5,8 @@ import tensorflow as tf
 from tensorflow.keras.models import Model
 
 
-MODEL_PATH = "/../persistent/baseline_model2_original"
-# MODEL_PATH = "/../persistent/baseline_model2"
+# MODEL_PATH = "/../persistent/baseline_model2_original"
+MODEL_PATH = "/../persistent/baseline_model2"
 EXAMPLE_IMAGE_PATH = "/../persistent/image/test_image.jpeg"
 embedding_dim = 256
 units = 512
@@ -25,13 +25,8 @@ new_input = image_model.input
 hidden_layer = image_model.layers[-1].output
 image_features_extract_model = Model(new_input, hidden_layer)
 
-# load tokenizer
-with open(os.path.join(MODEL_PATH,'tokenizer.json')) as f:
-    data = json.load(f)
-    tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(data)
-
 def generate_caption(image):
-    encoder, decoder = build_model_and_load_weights()
+    encoder, decoder, tokenizer = build_model_and_load_weights()
     # attention_plot = np.zeros((max_length, attention_features_shape))
 
     hidden = decoder.reset_state(batch_size=1)
@@ -69,6 +64,7 @@ def generate_caption(image):
 
 
 def build_model_and_load_weights():
+    tokenizer = load_tokenizer()
     encoder = CNN_Encoder(embedding_dim)
     decoder = RNN_Decoder(embedding_dim, units, vocab_size)
 
@@ -87,7 +83,7 @@ def build_model_and_load_weights():
     encoder.load_weights(os.path.join(MODEL_PATH,"encoder.h5"))
     decoder.load_weights(os.path.join(MODEL_PATH,"decoder.h5"))
 
-    return encoder, decoder
+    return encoder, decoder, tokenizer
 
 
 def load_image(image_path):
@@ -96,6 +92,13 @@ def load_image(image_path):
     img = tf.image.resize(img, (299, 299))
     img = tf.keras.applications.inception_v3.preprocess_input(img)
     return img
+
+def load_tokenizer():
+    # load tokenizer
+    with open(os.path.join(MODEL_PATH,'tokenizer.json')) as f:
+        data = json.load(f)
+        tokenizer = tf.keras.preprocessing.text.tokenizer_from_json(data)
+    return tokenizer
 
 
 class BahdanauAttention(Model):
