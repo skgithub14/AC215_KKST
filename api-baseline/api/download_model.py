@@ -14,6 +14,8 @@ if not os.path.exists(model_path):
     os.mkdir(model_path)
 if not os.path.exists(model_path2):
     os.mkdir(model_path2)
+if not os.path.exists(image_path):
+    os.mkdir(image_path)
 
 def download_blob(bucket_name, source_blob_name, destination_file_name):
     """Downloads a blob from the bucket."""
@@ -44,9 +46,9 @@ def download_baseline_model():
             print('Downloading decoder weights...')
             download_blob(bucket_name, decoder_file, os.path.join(persistent_folder, decoder_file))
 
-        if not os.path.exists(os.path.join(image_path, test_image_file)):
-            print('Downloading test image...')
-            download_blob(bucket_name, test_image_file, os.path.join(image_path, test_image_file))
+    if not os.path.exists(os.path.join(image_path, test_image_file)):
+        print('Downloading test image...')
+        download_blob(bucket_name, test_image_file, os.path.join(image_path, test_image_file))
 
 
     print('Done!')
