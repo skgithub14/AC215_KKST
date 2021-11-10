@@ -45,11 +45,8 @@ const Home = (props) => {
                 <Container maxWidth="md" className={classes.container}>
                     {prediction &&
                         <Typography variant="h4" gutterBottom align='center'>
-                            {!prediction.poisonous &&
-                                <span className={classes.safe}>{prediction.prediction_label + " (" + prediction["accuracy"] + "%)"}</span>
-                            }
-                            {prediction.poisonous &&
-                                <span className={classes.poisonous}>{prediction.prediction_label + " (" + prediction["accuracy"] + "%)"}&nbsp;&nbsp;Poisonous</span>
+                            {
+                                <span className={classes.safe}>{prediction["caption"]}</span>
                             }
                         </Typography>
                     }
