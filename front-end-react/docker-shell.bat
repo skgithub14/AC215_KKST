@@ -1,4 +1,4 @@
-SET IMAGE_NAME=app-frontend-react
+SET IMAGE_NAME=image_captioning-app-frontend-react
 SET BASE_DIR=%cd%
 
 docker build -t %IMAGE_NAME% -f Dockerfile.dev .
