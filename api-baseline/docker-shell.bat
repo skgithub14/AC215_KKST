@@ -1,5 +1,5 @@
 REM Define some environment variables
-SET IMAGE_NAME="image_captioning-app-api-server"
+SET IMAGE_NAME="caption-this-app-api-server"
 SET GCP_PROJECT="ac215-project"
 SET GCP_ZONE="us-central1-a"
 SET GOOGLE_APPLICATION_CREDENTIALS=/secrets/bucket-reader.json
