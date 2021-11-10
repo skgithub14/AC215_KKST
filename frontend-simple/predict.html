@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>🍄 Mushroom Identifier</title>
+    <title>Image Captioning App</title>
     <!-- Add reference to Google fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Google Material Design Styles -->
@@ -50,7 +50,6 @@
             outline: none;
             transition: border .24s ease-in-out;
             cursor: pointer;
-            background-image: url("https://storage.googleapis.com/public_colab_images/ai5/mushroom.svg");
             background-repeat: no-repeat;
             background-position: center;
         }
@@ -61,12 +60,6 @@
             font-weight: 900;
         }
 
-        .mushroom_type {
-            font-family: Roboto, sans-serif;
-            font-size: 32px;
-            font-weight: 900;
-            color: #de2d26;
-        }
     </style>
 </head>
 
@@ -77,8 +70,7 @@
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                 <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
                     aria-label="Open navigation menu">menu</button>
-                <span class="mdc-top-app-bar__title" style="font-weight: 900; font-size: 30px;">🍄 Mushroom
-                    Identifier</span>
+                <span class="mdc-top-app-bar__title" style="font-weight: 900; font-size: 30px;">Image Captioning App</span>
             </section>
         </div>
     </header>
@@ -96,8 +88,7 @@
                     <div style="color: #302f2f;">Click to take a picture or upload...</div>
                 </div>
                 <div style="padding:20px;">
-                    <span class="prediction" id="prediction_label"></span>
-                    <span class="mushroom_type" id="mushroom_type"></span>
+                    <span class="generated_caption" id="generated_caption"></span>
                 </div>
             </div>
         </div>
@@ -111,14 +102,12 @@
 
     // file input
     var input_file = document.getElementById("input_file");
-    var prediction_label = document.getElementById("prediction_label");
-    var prediction_accuracy = document.getElementById("prediction_accuracy");
-    var mushroom_type = document.getElementById("mushroom_type");
+    var generated_caption = document.getElementById("generated_caption");
     var input_file_view = document.getElementById('input_file_view');
 
     function upload_file() {
         // Clear
-        prediction_label.innerHTML = "";
+        generated_caption.innerHTML = "";
         input_file_view.src = null;
 
         input_file.click();
@@ -128,7 +117,7 @@
         // Read the uploaded file and display it
         var file_to_upload = input_file.files[0];
         input_file_view.src = URL.createObjectURL(file_to_upload);
-        prediction_label.innerHTML = "";
+        generated_caption.innerHTML = "";
 
         // Post the image to the /predict API
         var formData = new FormData();
@@ -142,12 +131,7 @@
             console.log(prediction_results);
 
             // Display the results
-            prediction_label.innerHTML = prediction_results["prediction_label"] + " (" + prediction_results["accuracy"] + "%)";
-            if (prediction_results["poisonous"]) {
-                mushroom_type.innerHTML = "&nbsp;&nbsp;Poisonous";
-            } else {
-                mushroom_type.innerHTML = "";
-            }
+            generated_caption.innerHTML = prediction_results["caption"];
 
         });
     }
