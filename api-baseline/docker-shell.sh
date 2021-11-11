@@ -6,7 +6,7 @@ set -e
 # Define some environment variables
 # Automatic export to the environment of subsequently executed commands
 # source: the command 'help export' run in Terminal
-export IMAGE_NAME="caption-this-app--api-service"
+export IMAGE_NAME="caption-this-app-api-service"
 export BASE_DIR=$(pwd)
 export PERSISTENT_DIR=$(pwd)/../persistent-folder/
 export SECRETS_DIR=$(pwd)/../secrets/
