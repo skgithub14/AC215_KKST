@@ -25,6 +25,7 @@ const Home = (props) => {
     // Handlers
     const handleImageUploadClick = () => {
         inputFile.current.click();
+        setPrediction(null);
     }
     const handleOnChange = (event) => {
         console.log(event.target.files);
@@ -45,9 +46,7 @@ const Home = (props) => {
                 <Container maxWidth="md" className={classes.container}>
                     {prediction &&
                         <Typography variant="h4" gutterBottom align='center'>
-                            {
-                                <span className={classes.safe}>{prediction["caption"]}</span>
-                            }
+                            {<span className={classes.caption}>{prediction["caption"]}</span>}
                         </Typography>
                     }
                     <div className={classes.dropzone} onClick={() => handleImageUploadClick()}>
