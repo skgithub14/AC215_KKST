@@ -53,7 +53,7 @@ async def predict(
     return generated_caption
 
 @app.post("/predict2")
-async def predict(
+async def predict2(
         file: bytes = File(...)
 ):
     print("predict file:", len(file), type(file))
