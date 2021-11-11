@@ -42,12 +42,9 @@ const styles = theme => ({
     help: {
         color: "#302f2f"
     },
-    safe: {
-        color: "#31a354",
-    },
-    poisonous: {
-        color: "#de2d26",
-    },
+    caption: {
+        color: "#000000",
+    }
 });
 
 export default styles;
