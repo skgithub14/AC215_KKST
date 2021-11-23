@@ -1,0 +1,27 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+uvicorn = "*"
+fastapi = "*"
+tensorflow = "*"
+google-auth = "*"
+google-cloud-storage = "*"
+tensorflow-hub = "*"
+python-multipart = "*"
+pandas = "*"
+matplotlib = "*"
+opencv-python = "*"
+torch = "*"
+torchvision = "*"
+ftfy = "*"
+regex = "*"
+tqdm = "*"
+"clip==1.0.0" = {editable = true, git = "https://github.com/openai/CLIP.git"}
+
+[requires]
+python_version = "3.8"
