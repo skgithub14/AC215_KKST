@@ -43,8 +43,6 @@ NUM_DEC_LAYERS = 6
 # claim clip model
 global device
 device = "cuda" if torch.cuda.is_available() else "cpu"
-clip_model = None
-clip_preprocess = None
 
 @lru_cache
 def load_clip():
