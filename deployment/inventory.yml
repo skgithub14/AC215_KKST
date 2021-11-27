@@ -1,0 +1,22 @@
+all:
+    vars:
+      ansible_user: sa_115139055024452826866  # change to your gcloud compute user name
+      ansible_ssh_private_key_file: "../secrets/ssh-key-deployment"
+      gcp_service_account_file: "../secrets/deployment.json"
+      gcp_service_account_email: "deployment@my-project-ac215.iam.gserviceaccount.com"  # change to your service account
+      gcp_auth_kind: "serviceaccount"
+      gcp_scopes: "https://www.googleapis.com/auth/compute"
+      gcp_project: "my-project-ac215" # change to your GCP project name
+      gcp_region: "us-central1"
+      gcp_zone: "us-central1-a"
+      docker_network_name: "appnetwork"
+      persistent_disk_name: "caption-this-app-disk"
+      persistent_disk_size: 50
+      machine_instance_name: "caption-this-app"
+      machine_type: "n2-standard-2"
+      machine_disk_size: 30
+
+    children:
+        appserver:
+            hosts:
+                34.132.215.130:  # change to the IP address of the VM instance once it's running
