@@ -6,6 +6,7 @@ persistent-folder/
 
 # Security
 secrets/
+.docker-tag
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
