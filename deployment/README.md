@@ -25,4 +25,15 @@ Once the account is created, make a json key named `gcp-service.json` and add it
 
 Note that besides these two keys, one should obtain the `bucket-reader.json` file from the team members and add it to the **secrets** folder too.
 
-##
+## Set up Docker container for deployment
+Within this folder, run `sh docker-shell.sh` in the terminal to build and enter the docker container.
+
+Check the versions of these tools:
+```
+gcloud --version
+ansible --version
+kubectl version --client
+```
+
+Run `gcloud auth list` to check the authentication to GCP.
+
