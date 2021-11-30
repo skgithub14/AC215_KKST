@@ -32,6 +32,7 @@ Some example captions generated on images in our test data from Flickr8k and MS-
 ![Examples of captions](src/example_captions.png)
 
 For details of the model, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) in the notebook folder.
+The [code](https://github.com/skgithub14/AC215_KKST/blob/main/api-service/api/transformer_model.py) can also be found in `api-service/api` folder.
 
 
 
@@ -53,7 +54,7 @@ Before running, add the GCP bucket authorization file into the `secrets` folder 
 
 Change directory back to this folder, run `sh docker-shell.sh` to build and start the container, and then run `uvicorn_server` to start the API server at `localhost:9000`.
 
-Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the `persistent-folder` in the parent directory. 
+Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the **persistent-folder** in the parent directory. 
 
 The `/predict` service uses the transformer-based model (defined in `api/transformer_model.py`) to generate caption of an image.
 
