@@ -9,7 +9,7 @@ This folder contains the files to build the Docker container and Ansible scripts
 - Google Container Registry API
 
 ## GCP service accounts
-For deployment, we need to set up two GCP service account.
+For deployment, we need to set up two GCP service accounts.
 1. `deployment` service account with required roles:
 - Compute Admin
 - Compute OS Login
