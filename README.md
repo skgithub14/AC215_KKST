@@ -1,7 +1,7 @@
 AC215-KKST
 ==============================
 
-This is the repository for the final project of Harvard AC215 Fall 2021. 
+This is the repository for the final project of Harvard AC215 - Advanced Pratcial Data Science (DevOps for Deep Learning), Fall 2021. 
 
 ## Team Members
 - Matthew Stewart 
@@ -9,6 +9,11 @@ This is the repository for the final project of Harvard AC215 Fall 2021.
 - Al-Muataz Khalil 
 - Shih-Yi Tseng 
 - Ed Bayes
+
+# Topic: Image Captioning
+
+In this prject, we trained a deep learning model for image captioning, and built a web-based AI App that allows users to upload images in the frontend and generate captions with the model. 
+
 
 Project Organization
 ------------
