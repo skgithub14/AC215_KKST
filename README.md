@@ -65,7 +65,7 @@ Upon interaction with the frontend, the server takes an upladed image as input a
 ### Frontend
 The **frontend-react** folder holds the container for the react frontend app which creates a page that allows us to upload an image and view the predicted image caption.
 
-To set up the React Frontend, follow these steps:
+To set up the react frontend, follow these steps:
 - Run `sh docker-shell.sh` or `docker-shell.bat`
 - Wait for docker shell to start up
 - Run `yarn install`. This will ensure all your node packages for React are installed
