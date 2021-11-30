@@ -26,7 +26,7 @@ For the transformer, we implemented 2 extra encoder blocks (since the CLIP embed
 
 For details of the model, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) in the notebook folder.
 
-![](src/model_schematics.png)
+![Schematic of the model](src/model_schematics.png)
 
 ## Key components
 
