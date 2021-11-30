@@ -28,12 +28,35 @@ Note that besides these two keys, one should obtain the `bucket-reader.json` fil
 ## Set up Docker container for deployment
 Within this folder, run `sh docker-shell.sh` in the terminal to build and enter the docker container.
 
-Check the versions of these tools:
+Once inside the container, check the versions of these tools:
 ```
 gcloud --version
 ansible --version
 kubectl version --client
 ```
 
-Run `gcloud auth list` to check the authentication to GCP.
+Next, run `gcloud auth list` to check the authentication to GCP.
+
+## Set up SSH key
+First, configure OS Login for the service account:
+```
+gcloud compute project-info add-metadata --project <YOUR GCP_PROJECT> --metadata enable-oslogin=TRUE
+```
+
+Next, create SSH key for the service account in the **secrets** folder:
+```
+cd /secrets
+ssh-keygen -f ssh-key-deployment
+cd /app
+```
+
+Then, provide the public key to the gcloud compute instances:
+```
+gcloud compute os-login ssh-keys add --key-file=/secrets/ssh-key-deployment.pub
+```
+
+Copy the `username` of the output, which will be used in the next step.
+
+
+## Deployment setup
 
