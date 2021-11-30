@@ -26,6 +26,8 @@ For the transformer, we implemented 2 extra encoder blocks (since the CLIP embed
 
 For details of the model, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) in the notebook folder.
 
+![Schematic of the model](src/model_schematics.png)
+
 ## Key components
 
 The three key components of the App are
@@ -34,7 +36,13 @@ The three key components of the App are
 - **frontend-react**: contains codes for the React frontend
 - **deployment**: contains scripts for deploying the App on Google Cloud Platform (GCP)
 
+## Setup
+### API
 
+### Frontend
+
+
+### Deployment
 
 
 Project Organization
