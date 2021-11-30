@@ -26,7 +26,11 @@ For the transformer, we implemented 2 extra encoder blocks (since the CLIP embed
 
 For details of the model, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) in the notebook folder.
 
+Here is the schematic of our model.
 ![Schematic of the model](src/model_schematics.png)
+
+Some example captions generated on images in our test data from Flickr8k and MS-COCO datasets.
+![Examples of captions](src/example_captions.png)
 
 ## Key components
 
