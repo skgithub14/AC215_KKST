@@ -47,6 +47,19 @@ The three key components of the App are
 ## Setup
 ### API
 
+The `api-service` folder holds the files to set up the container and Python codes (inside `api` subfolder) for running the API server to serve our image captioning model.
+
+Before running, add the GCP bucket authorization file into the `secrets` folder in the parent directory, and name the file as `bucket-reader.json`.
+
+Change directory back to this folder, run `sh docker-shell.sh` to build and start the container, and then run `uvicorn_server` to start the API server at `localhost:9000`.
+
+Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the `persistent-folder` in the parent directory. 
+
+The `/predict` service uses the transformer-based model (defined in `api/transformer_model.py`) to generate caption of an image.
+
+Upon interaction with the frontend, the server takes an upladed image as input and return a dictionary with the generated caption in the form of {'caption': generated_caption}.
+
+
 ### Frontend
 
 
