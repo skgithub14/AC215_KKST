@@ -58,5 +58,42 @@ gcloud compute os-login ssh-keys add --key-file=/secrets/ssh-key-deployment.pub
 Copy the `username` of the output, which will be used in the next step.
 
 
-## Deployment setup
+## Deployment
+Before deployment, go to the `inventory.yml` file, change the ansible user to the username copied from last step, and change the service account email and project name to your own.
+
+First, build and push the Docker images for the api-service and frontend to Google Container Registry:
+```
+ansible-playbook deploy-docker-images.yml -i inventory.yml
+```
+
+Next, create a VM instance in GCP:
+```
+ansible-playbook deploy-create-instance.yml -i inventory.yml --extra-vars cluster_state=present
+```
+Once the VM is created, get the IP address of the compute instance from GCP Console and update the appserver>hosts in the `inventory.yml` file.
+
+
+Provision:
+```
+ansible-playbook deploy-provision-instance.yml -i inventory.yml
+```
+
+Setup Docker containers in the Compute Instance:
+```
+ansible-playbook deploy-setup-containers.yml -i inventory.yml
+```
+
+Setup webserver in the Compute Instance:
+```
+ansible-playbook deploy-setup-webserver.yml -i inventory.yml
+```
+
+Last, go to `http://<External IP>/` to see the Image Captioning App.
+
+To delete the instnace, run
+```
+ansible-playbook deploy-create-instance.yml -i inventory.yml --extra-vars cluster_state=absent
+```
+
+
 
