@@ -74,6 +74,7 @@ The **deployment** folder contains the files to build the Docker container and A
 
 #### 2. GCP service accounts
 For deployment, we need to set up two GCP service accounts.
+
 (1) `deployment` service account with required roles:
 - Compute Admin
 - Compute OS Login
@@ -81,10 +82,12 @@ For deployment, we need to set up two GCP service accounts.
 - Kubernetes Engine Admin
 - Service Account User
 - Storage Admin
+
 Once the account is created, make a json key named `deployment.json` and add it the the **secrets** folder.
 
 (2) `gcp-service` service account with one required role:
 - Storage Object Viewer
+
 Once the account is created, make a json key named `gcp-service.json` and add it the the **secrets** folder.
 
 Note that besides these two keys, one should obtain the `bucket-reader.json` file from the team members and add it to the **secrets** folder too.
