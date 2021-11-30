@@ -4,10 +4,10 @@ AC215-KKST
 This is the repository for the final project of Harvard AC215 - Advanced Pratcial Data Science (DevOps for Deep Learning), Fall 2021. 
 
 ### Team Members
-- Matthew Stewart 
 - Steve Knapp 
-- Al-Muataz Khalil 
 - Shih-Yi Tseng 
+- Al-Muataz Khalil
+- Matthew Stewart  
 - Ed Bayes
 
 # Topic: Image Captioning
