@@ -53,7 +53,7 @@ The **api-service** folder holds the files to set up the Docker container and pi
 
 Before running, add the GCP bucket authorization file into the `secrets` folder in the parent directory, and name the file as `bucket-reader.json`.
 
-Change directory back to this folder, run `sh docker-shell.sh` to build and start the container, and then run `uvicorn_server` to start the API server at `localhost:9000`.
+Change directory back to this folder, run `sh docker-shell.sh` or `docker-shell.bat` to build and start the container, and then run `uvicorn_server` to start the API server at `localhost:9000`.
 
 Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the **persistent-folder** in the parent directory. 
 
@@ -63,7 +63,15 @@ Upon interaction with the frontend, the server takes an upladed image as input a
 
 
 ### Frontend
+The **frontend-react** folder holds the container for the react frontend app which creates a page that allows us to upload an image and view the predicted image caption.
 
+To set up the React Frontend, follow these steps:
+- Run `sh docker-shell.sh` or `docker-shell.bat`
+- Wait for docker shell to start up
+- Run `yarn install`. This will ensure all your node packages for React are installed
+- Run `yarn start` to start your React App
+- Go to the page http://localhost:3000
+- Upload image to get predicted caption
 
 ### Deployment
 The **deployment** folder contains the files to build the Docker container and Ansible scripts for deploying our Image Captioning App to web with Kubernetes on Googld Cloud Platform (GCP).
@@ -95,7 +103,7 @@ Once the account is created, make a json key named `gcp-service.json` and add it
 Note that besides these two keys, one should obtain the `bucket-reader.json` file from the team members and add it to the **secrets** folder too.
 
 #### 3. Set up Docker container for deployment
-Within this folder, run `sh docker-shell.sh` in the terminal to build and enter the docker container.
+Within this folder, run `sh docker-shell.sh` or `docker-shell.bat` in the terminal to build and enter the docker container.
 
 Once inside the container, check the versions of these tools:
 ```
