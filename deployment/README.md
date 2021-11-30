@@ -58,7 +58,7 @@ gcloud compute os-login ssh-keys add --key-file=/secrets/ssh-key-deployment.pub
 Copy the `username` of the output, which will be used in the next step.
 
 
-## Deployment
+## Deployment in a GCP Compute Instance (VM)
 Before deployment, go to the `inventory.yml` file, change the ansible user to the username copied from last step, and change the service account email and project name to your own.
 
 First, build and push the Docker images for the api-service and frontend to Google Container Registry:
@@ -95,5 +95,22 @@ To delete the instnace, run
 ansible-playbook deploy-create-instance.yml -i inventory.yml --extra-vars cluster_state=absent
 ```
 
+##  Deployment in a GCP Kubernetes Cluster
 
+Before deploying on K8s cluster, make sure the Docker images for the api-service and frontend have been pushed to Google Container Registry.
+
+Within the deployment container, run `gcloud auth list` to check GCP authentification. 
+
+To deploy, run
+```
+ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=present
+```
+
+To view the App, copy the `nginx_ingress_ip` from the terminal after executing the create clsuter command, and then go to `http://<YOUR INGRESS IP>.sslip.io` to see the deployed App.
+
+
+To delete the cluster, run
+```
+ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_state=absent
+```
 
