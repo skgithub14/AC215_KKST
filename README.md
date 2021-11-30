@@ -36,7 +36,13 @@ The three key components of the App are
 - **frontend-react**: contains codes for the React frontend
 - **deployment**: contains scripts for deploying the App on Google Cloud Platform (GCP)
 
+## Setup
+### API
 
+### Frontend
+
+
+### Deployment
 
 
 Project Organization
