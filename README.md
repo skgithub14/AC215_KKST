@@ -1,7 +1,14 @@
 AC215-KKST
 ==============================
 
-AC215 Project
+This is the repository for the final project of Harvard AC215 Fall 2021. 
+
+## Team Members
+- Matthew Stewart 
+- Steve Knapp 
+- Al-Muataz Khalil 
+- Shih-Yi Tseng 
+- Ed Bayes
 
 Project Organization
 ------------
