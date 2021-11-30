@@ -53,7 +53,7 @@ The **api-service** folder holds the files to set up the Docker container and pi
 
 Before running, add the GCP bucket authorization file into the `secrets` folder in the parent directory, and name the file as `bucket-reader.json`.
 
-Change directory back to this folder, run `sh docker-shell.sh` or `docker-shell.bat` to build and start the container, and then run `uvicorn_server` to start the API server at `localhost:9000`.
+Change directory back to this folder, run `sh docker-shell.sh` or `docker-shell.bat` to build and start the container, and then run `uvicorn_server` to start the API server at http://localhost:9000.
 
 Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the **persistent-folder** in the parent directory. 
 
