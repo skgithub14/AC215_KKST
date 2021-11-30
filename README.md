@@ -47,7 +47,7 @@ The three key components of the App are
 ## Setup
 ### API
 
-The `api-service` folder holds the files to set up the container and Python codes (inside `api` subfolder) for running the API server to serve our image captioning model.
+The `api-service` folder holds the files to set up the Docker container and pipenv virtual environment, as well as Python codes (inside `api` subfolder) for running the API server to serve our image captioning model.
 
 Before running, add the GCP bucket authorization file into the `secrets` folder in the parent directory, and name the file as `bucket-reader.json`.
 
@@ -66,7 +66,7 @@ Upon interaction with the frontend, the server takes an upladed image as input a
 ### Deployment
 
 
-Project Organization
+# Project Organization
 ------------
       .
       ├── LICENSE
