@@ -19,7 +19,7 @@ In this project, we trained a deep learning model for image captioning, and buil
 Our image captioning model is a transformer-based model. It consists of an encoder part based on extracted features of an input image, and a decoder part that generates caption. 
 
 Schematic of our model:
-![Schematic of the model](src/model_schematics.png)
+![Schematic of the model](src/model_schematics1.png)
 
 
 For image feature extraction, we use the ViT-B/16 image encoder of the OpenAI CLIP model as the feature extractor, which outputs a 512-dim embedding for an input image. The CLIP model was pre-trained to minimize contrastive loss between a large dataset with matching images and captions, which learns a latent embedding that represents details of an image and its corresponding langauge descritpion.
