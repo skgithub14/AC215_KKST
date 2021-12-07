@@ -18,13 +18,13 @@ In this project, we trained a deep learning model for image captioning, and buil
 
 Our first image captioning model is a transformer-based, standard encoder-decoder model. It consists of an encoder part based on extracted features of an input image, and a decoder part that generates caption. 
 
-Schematic of the encoder-decoder model:
+Schematic of the **encoder-decoder model**:
 ![Schematic of the encoder-decoder model](src/model1_schematics.png)
 
 
 Our second model is a prefix model, which appends the encoded image feature to the embedded text as a prefix, and uses the decoder to generate caption (no cross-attention blocks for the decoder).
 
-Schematic of the prefix model:
+Schematic of the **prefix model**:
 ![Schematic of the prefix model](src/model2_schematics.png)
 
 
