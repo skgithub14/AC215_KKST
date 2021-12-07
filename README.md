@@ -63,7 +63,7 @@ Change directory back to this folder, run `sh docker-shell.sh` or `docker-shell.
 
 Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the **persistent-folder** in the parent directory. 
 
-The `/predict` service uses the transformer-based model (defined in `api/model.py`) to generate caption of an image, and the `/predict_prefix` service uses the prefix model.
+The `/predict` service uses the encoder-decoder transformer model (defined in `api/model.py`) to generate caption of an image, and the `/predict_prefix` service uses the prefix transformer model, and the `/predict` service uses the RNN model.
 
 Upon interaction with the front-end, the server takes an upladed image as input and return a dictionary with the generated caption in the form of {'caption': generated_caption}.
 
