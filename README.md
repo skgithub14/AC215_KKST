@@ -33,7 +33,7 @@ Some example captions generated on images in our test data from Flickr8k and MS-
 
 For details of the model, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) in the notebook folder.
 
-The [code](https://github.com/skgithub14/AC215_KKST/blob/main/api-service/api/transformer_model.py) can also be found in **api-service/api** folder.
+The [code](https://github.com/skgithub14/AC215_KKST/blob/main/api-service/api/model.py) can also be found in **api-service/api** folder.
 
 
 
