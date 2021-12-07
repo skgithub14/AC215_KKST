@@ -2,7 +2,6 @@ import os
 import sys
 import re
 import numpy as np
-import pandas as pd
 import pickle
 from PIL import Image
 from functools import lru_cache
@@ -19,9 +18,9 @@ import clip
 
 ## Define global parameters
 # Path to model weights and vectorization
-MODEL_PATH = "/../persistent/transformer_model"
+TRANSFORMER_MODEL_PATH = "/../persistent/transformer_model"
 EXAMPLE_IMAGE_PATH = "/../persistent/image/test_image.jpeg"
-sys.path.append(MODEL_PATH)
+sys.path.append(TRANSFORMER_MODEL_PATH)
 sys.path.append(EXAMPLE_IMAGE_PATH)
 # Vocabulary size
 VOCAB_SIZE = 15000
@@ -46,7 +45,9 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 @lru_cache
 def load_clip():
+    print('Download CLIP model...')
     clip_model, clip_preprocess = clip.load("ViT-B/16", device=device)
+    print('Done!')
     return clip_model, clip_preprocess
 
 def load_and_process_image(path):
@@ -66,8 +67,8 @@ def load_and_process_image(path):
     return embedded_img
 
 
-def generate_caption(img_path):
-    caption_model, vectorization = build_model_and_load_weights()
+def generate_caption_transformer(img_path):
+    caption_model, vectorization = build_model_and_load_weights_transformer()
 
     # get index_word and word_index conversion
     vocab = vectorization.get_vocabulary()
@@ -101,9 +102,9 @@ def generate_caption(img_path):
 
 
 @lru_cache
-def build_model_and_load_weights():
+def build_model_and_load_weights_transformer():
     ## load saved vectorization
-    vectorization_weight = pickle.load(open(os.path.join(MODEL_PATH,"vectorization_weights.pkl"), "rb"))
+    vectorization_weight = pickle.load(open(os.path.join(TRANSFORMER_MODEL_PATH,"vectorization_weights.pkl"), "rb"))
     # Initiate vectorization
     vectorization = TextVectorization(
         max_tokens=VOCAB_SIZE,
@@ -134,8 +135,8 @@ def build_model_and_load_weights():
     predictions = decoder(tokenized_caption, encoded_img, training=False, mask=mask)
     
     # load model weights
-    encoder.load_weights(os.path.join(MODEL_PATH,"encoder.h5"))
-    decoder.load_weights(os.path.join(MODEL_PATH,"decoder.h5"))
+    encoder.load_weights(os.path.join(TRANSFORMER_MODEL_PATH,"encoder.h5"))
+    decoder.load_weights(os.path.join(TRANSFORMER_MODEL_PATH,"decoder.h5"))
     caption_model = ImageCaptioningModel(encoder=encoder, decoder=decoder)
 
     return caption_model, vectorization
