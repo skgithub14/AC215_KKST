@@ -43,6 +43,7 @@ async def get_index():
         "message": "Welcome to the API Service"
     }
 
+# Make prediction using the encoder-decoder transformer model
 @app.post("/predict")
 async def predict(
         file: bytes = File(...)
@@ -60,6 +61,7 @@ async def predict(
 
     return generated_caption
 
+# Make prediction using the prefix transformer model
 @app.post("/predict_prefix")
 async def predict(
         file: bytes = File(...)
@@ -77,6 +79,7 @@ async def predict(
 
     return generated_caption
 
+# Make prediction using the RNN model (baseline model)
 @app.post("/predict_rnn")
 async def predict(
         file: bytes = File(...)
