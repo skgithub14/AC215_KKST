@@ -46,7 +46,7 @@ const Home = (props) => {
                 <Container maxWidth="md" className={classes.container}>
                     {prediction &&
                         <Typography variant="h4" gutterBottom align='center'>
-                            {<span className={classes.caption}>{prediction["caption"]}</span>}
+                            {<span className={classes.caption}>Caption: {prediction["caption"]}</span>}
                         </Typography>
                     }
                     <div className={classes.dropzone} onClick={() => handleImageUploadClick()}>
@@ -62,7 +62,7 @@ const Home = (props) => {
                             onChange={(event) => handleOnChange(event)}
                         />
                         <div><img className={classes.preview} src={image} /></div>
-                        <div className={classes.help}>Click to take a picture or upload...</div>
+                        <div className={classes.help}>Click here to upload an image</div>
                     </div>
                 </Container>
             </main>
