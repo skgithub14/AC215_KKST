@@ -52,7 +52,7 @@ const Header = (props) => {
                     </IconButton>
                     <Link to="/" className={classes.appLink}>
                         <Typography className={classes.appTitle} >
-                            Image Captioning
+                            Image Captioning App
                         </Typography>
                     </Link>
 
