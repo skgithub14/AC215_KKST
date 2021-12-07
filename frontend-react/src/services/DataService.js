@@ -20,6 +20,13 @@ const DataService = {
             }
         });
     },
+    Predict_RNN: async function (formData) {
+        return await axios.post(BASE_API_URL + "/predict_rnn", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    },
 }
 
 export default DataService;
