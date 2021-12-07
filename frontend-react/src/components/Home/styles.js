@@ -40,7 +40,8 @@ const styles = theme => ({
         width: "100%",
     },
     help: {
-        color: "#302f2f"
+        color: "#302f2f",
+        fontSize: "20px"
     },
     caption: {
         color: "#000000",
