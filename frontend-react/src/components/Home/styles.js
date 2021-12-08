@@ -15,6 +15,18 @@ const styles = theme => ({
         paddingTop: "30px",
         paddingBottom: "20px",
     },
+    menu_block:{
+        textAlign: "center",
+    },
+    select_title: {
+        position: 'relative',
+        fontSize: "22px",
+        fontWeight: 'bold'
+    },
+    menu: {
+        position: 'relative',
+        fontSize: "20px",
+    },
     dropzone: {
         flex: 1,
         display: "flex",
@@ -35,6 +47,13 @@ const styles = theme => ({
     },
     fileInput: {
         display: "none",
+    },
+    button_block:{
+        textAlign: "center"
+    },
+    button: {
+        position: 'relative',
+        fontSize: "20px",
     },
     preview: {
         width: "100%",

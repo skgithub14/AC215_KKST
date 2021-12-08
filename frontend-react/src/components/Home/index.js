@@ -15,8 +15,25 @@ const Home = (props) => {
 
     // Component States
     const [image, setImage] = useState(null);
+    const [imageData, setImageData] = useState(null);
     const [prediction, setPrediction] = useState(null);
+    const [model_type, setModelType] = useState("1");
 
+    const options = [
+        {
+          label: "Encoder-decoder transformer",
+          value: "1",
+        },
+        {
+          label: "Prefix transformer",
+          value: "2",
+        },
+        {
+          label: "RNN with attention",
+          value: "3",
+        },
+      ];
+ 
     // Setup Component
     useEffect(() => {
 
@@ -33,22 +50,56 @@ const Home = (props) => {
 
         var formData = new FormData();
         formData.append("file", event.target.files[0]);
-        DataService.Predict(formData)
-            .then(function (response) {
-                console.log(response.data);
-                setPrediction(response.data);
-            })
+        setImageData(formData);
+    }
+
+    const handleGenerateClick = () => {
+        if (imageData===null) return; 
+        setPrediction(null);
+        if (model_type==="1") {
+            DataService.Predict(imageData)
+                .then(function (response) {
+                    console.log(response.data);
+                    setPrediction(response.data);
+                })
+            } else if (model_type==="2") {
+                DataService.Predict_prefix(imageData)
+                .then(function (response) {
+                    console.log(response.data);
+                    setPrediction(response.data);
+                })
+            } else if (model_type==="3") {
+                DataService.Predict_RNN(imageData)
+                .then(function (response) {
+                    console.log(response.data);
+                    setPrediction(response.data);
+                })
+            }
+        
+    }
+    
+    
+
+    const handleSelect = (event) => {
+        console.log("Model selected");
+        setModelType(event.target.value);      
     }
 
     return (
         <div className={classes.root}>
             <main className={classes.main}>
                 <Container maxWidth="md" className={classes.container}>
-                    {prediction &&
-                        <Typography variant="h4" gutterBottom align='center'>
-                            {<span className={classes.caption}>Caption: {prediction["caption"]}</span>}
-                        </Typography>
-                    }
+                <div className={classes.menu_block}>
+                    <label className={classes.select_title}>Select model type</label>
+                    <br/>
+                    <select className={classes.menu} 
+                        value={model_type} 
+                        onChange={(event) => handleSelect(event)}>
+                        {options.map((option) => (
+                            <option value={option.value}>{option.label}</option>
+                        ))}
+                    </select>
+                </div>
                     <div className={classes.dropzone} onClick={() => handleImageUploadClick()}>
                         <input
                             type="file"
@@ -64,6 +115,17 @@ const Home = (props) => {
                         <div><img className={classes.preview} src={image} /></div>
                         <div className={classes.help}>Click here to upload an image</div>
                     </div>
+                    <div className={classes.button_block}>
+                        <button className={classes.button} onClick={() => handleGenerateClick()} disabled={!image}>
+                            Gereate caption
+                        </button>
+                    </div>
+                    <br/>
+                    {prediction &&
+                        <Typography variant="h4" gutterBottom align='center'>
+                            {<span className={classes.caption}>{prediction["caption"]}</span>}
+                        </Typography>
+                    }
                 </Container>
             </main>
         </div>
