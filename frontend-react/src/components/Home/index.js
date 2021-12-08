@@ -117,7 +117,7 @@ const Home = (props) => {
                     </div>
                     <div className={classes.button_block}>
                         <button className={classes.button} onClick={() => handleGenerateClick()} disabled={!image}>
-                            Gereate caption
+                            Generate caption
                         </button>
                     </div>
                     <br/>
