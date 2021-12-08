@@ -2,7 +2,7 @@
 
 This folder holds the container and codes for running API servers to serve our current best model for image captioning.
 
-Before running, copy the GCP bucket authorization file into the **secrets** folder in the parent directory, and name the file as `bucket-reader.json`.
+Before running, copy the Before running, add the [GCP bucket authorization file](https://github.com/skgithub14/AC215_KKST/blob/main/secrets/bucket-reader.json) into the `secrets` folder in the parent directory, and name the file as `bucket-reader.json`.
 
 Run `sh docker-shell.sh` or `docker-shell.bat` to enter the container, and then run `uvicorn_server` to start the api server at http://localhost:9000.
 
