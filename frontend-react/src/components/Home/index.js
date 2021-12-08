@@ -29,7 +29,7 @@ const Home = (props) => {
           value: "2",
         },
         {
-          label: "RNN with attention (basdline model)",
+          label: "RNN with attention (baseline model)",
           value: "3",
         },
       ];
@@ -42,15 +42,17 @@ const Home = (props) => {
     // Handlers
     const handleImageUploadClick = () => {
         inputFile.current.click();
-        setPrediction(null);
     }
     const handleOnChange = (event) => {
-        console.log(event.target.files);
-        setImage(URL.createObjectURL(event.target.files[0]));
+        if (event.target.files.length === 1) {
+            setPrediction(null);
+            console.log(event.target.files);
+            setImage(URL.createObjectURL(event.target.files[0]));
 
-        var formData = new FormData();
-        formData.append("file", event.target.files[0]);
-        setImageData(formData);
+            var formData = new FormData();
+            formData.append("file", event.target.files[0]);
+            setImageData(formData);
+        }
     }
 
     const handleGenerateClick = () => {
