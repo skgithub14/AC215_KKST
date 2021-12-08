@@ -29,7 +29,7 @@ const Home = (props) => {
           value: "2",
         },
         {
-          label: "RNN with attention",
+          label: "RNN with attention (basdline model)",
           value: "3",
         },
       ];
