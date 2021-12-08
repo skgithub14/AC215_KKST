@@ -23,7 +23,7 @@ Once the account is created, make a json key named `deployment.json` and add it 
 - Storage Object Viewer
 Once the account is created, make a json key named `gcp-service.json` and add it the the **secrets** folder.
 
-Note that besides these two keys, one should obtain the `bucket-reader.json` file from the team members and add it to the **secrets** folder too.
+Note that besides these two keys, make sure to put the `bucket-reader.json` [file](https://github.com/skgithub14/AC215_KKST/blob/main/secrets/bucket-reader.json) in the **secrets** folder too.
 
 ## Set up Docker container for deployment
 Within this folder, run `sh docker-shell.sh` in the terminal to build and enter the docker container.
