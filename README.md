@@ -39,7 +39,7 @@ Some example captions generated on images in our test data from Flickr8k and MS-
 
 For details of the models, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) for encoder-decoder model and this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/CLIP_Prefix_Transformer_Image_Captioning_with_Distillation.ipynb) for prefix model with distillation in the **notebooks** folder.
 
-The [code](https://github.com/skgithub14/AC215_KKST/blob/main/api-service/api/model.py) can also be found in **api-service/api** folder.
+The [code](https://github.com/skgithub14/AC215_KKST/blob/main/api-service/api/model.py) can also be found in **api-service/api** folder or the [**models**](https://github.com/skgithub14/AC215_KKST/tree/main/models) folder.
 
 
 ## App Design
