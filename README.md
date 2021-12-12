@@ -32,12 +32,12 @@ For image feature extraction, we use the ViT-B/16 image encoder of the OpenAI CL
 - Read about CLIP: https://openai.com/blog/clip/
 - Github for CLIP: https://github.com/openai/CLIP
 
-For the transformer, we implemented 2 extra encoder blocks (since the CLIP embedding is already an output of a visual transformer, ViT-B/16), together with 6 decoder blocks to generate captions. The embedded dimension for both image feature and tokenized text is 512, and each attention block in the encoder/decoder has 10 attention heads. The prefix / projected length of the image features is 16. Both models were trained on the [Flickr8k](https://www.kaggle.com/adityajn105/flickr8k) and [MS-COCO](https://cocodataset.org/#home) datasets with ~600k image-caption pairs. 
+For the transformer, we implemented 2 extra encoder blocks (since the CLIP embedding is already an output of a visual transformer, ViT-B/16), together with 6 decoder blocks to generate captions. The embedded dimension for both image feature and tokenized text is 512, and each attention block in the encoder/decoder has 10 attention heads. The prefix / projected length of the image features is 16. Additionally, we trained a distilled model of the prefix model with smaller architecture (1 encoder block, 3 decoder blocks, 8 attention heads, prefix length 10). Both models were trained on the [Flickr8k](https://www.kaggle.com/adityajn105/flickr8k) and [MS-COCO](https://cocodataset.org/#home) datasets with ~600k image-caption pairs. 
 
 Some example captions generated on images in our test data from Flickr8k and MS-COCO datasets.
 ![Examples of captions](src/example_captions.png)
 
-For details of the models, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) for encoder-decoder model and this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/CLIP_Prefix_Transformer_Image_Captioning.ipynb) for prefix model in the **notebooks** folder.
+For details of the models, please refer to this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/Transformer_based_image_captioning_with_CLIP_embedding.ipynb) for encoder-decoder model and this [Colab notebook](https://github.com/skgithub14/AC215_KKST/blob/main/notebooks/CLIP_Prefix_Transformer_Image_Captioning_with_Distillation.ipynb) for prefix model with distillation in the **notebooks** folder.
 
 The [code](https://github.com/skgithub14/AC215_KKST/blob/main/api-service/api/model.py) can also be found in **api-service/api** folder.
 
