@@ -21,30 +21,36 @@ import clip
 # Path to model weights and vectorization
 TRANSFORMER_MODEL_PATH = "/../persistent/transformer_model"
 PREFIX_MODEL_PATH = "/../persistent/prefix_model"
+DISTILL_MODEL_PATH = "/../persistent/distilled_prefix_model"
 RNN_MODEL_PATH = "/../persistent/rnn_model"
 EXAMPLE_IMAGE_PATH = "/../persistent/image/test_image.jpeg"
 sys.path.append(TRANSFORMER_MODEL_PATH)
 sys.path.append(PREFIX_MODEL_PATH)
+sys.path.append(DISTILL_MODEL_PATH)
 sys.path.append(RNN_MODEL_PATH)
 sys.path.append(EXAMPLE_IMAGE_PATH)
 
 ## Parameters for transformer & prefix models
 # Vocabulary size
 VOCAB_SIZE = 15000
-# Made up length for the transformed image feature
-IMAGE_LENGTH = 16
 # Fixed length allowed for any sequence
 SEQ_LENGTH = 25
+# Made up length for the transformed image feature
+IMAGE_LENGTH = 16
+IMAGE_LENGTH_DISTILL = 10
 # Number of attention heads
 NUM_HEADS = 10
+NUM_HEADS_DISTILL = 8
 # Dimension for the image embeddings and token embeddings
 EMBED_DIM = 512
 # Per-layer units in the feed-forward network
 FF_DIM = EMBED_DIM*4
 # Number of encoder blocks
 NUM_ENC_LAYERS = 2
+NUM_ENC_LAYERS_DISTILL = 1
 # Number of decoder blocks
 NUM_DEC_LAYERS = 6
+NUM_DEC_LAYERS_DISTILL = 3
 
 ## Parameters for RNN model
 embedding_dim = 256
@@ -139,6 +145,54 @@ def generate_caption_transformer(img_path):
 
 def generate_caption_prefix(img_path):
     caption_model, vectorization = build_model_and_load_weights_prefix()
+
+    # get index_word and word_index conversion
+    vocab = vectorization.get_vocabulary()
+    index_word = dict(zip(range(len(vocab)), vocab))
+    # word_index = dict(zip(vocab, range(len(vocab))))
+
+    # Load raw image and embed with CLIP
+    embedded_img = load_and_process_image(img_path)
+
+    # Pass the image features to the Transformer encoder
+    encoder_output = caption_model.encoder(embedded_img, training=False)
+    prefix_length = tf.shape(encoder_output)[1]
+
+    # Generate the caption using the Transformer decoder
+    decoded_caption = "<start>"
+    for i in range(SEQ_LENGTH - 1):
+        tokenized_caption = vectorization([decoded_caption])
+
+        # concatenate dummy tokens for prefix and token
+        caption_prefix = tf.concat([VOCAB_SIZE*tf.ones((1, prefix_length),dtype=tf.int64), tokenized_caption], axis=1)
+
+        # shift to create input and target
+        seq_inp = tokenized_caption[:, :-1]
+        seq_true = caption_prefix[:, 1:]
+
+        # obtain mask (0 is the pad token)
+        mask = tf.math.not_equal(seq_true, 0)
+
+        # pass thtought decoder
+        predictions = caption_model.decoder(
+            seq_inp, encoder_output, training=False, mask=mask
+        )
+
+        # extract predicted token (location: i + prefix_length - 1)
+        sampled_token_index = np.argmax(predictions[0, i + prefix_length, :])
+        sampled_token = index_word[sampled_token_index]
+        #print(sampled_token)
+        if sampled_token == "<end>":
+            break
+        decoded_caption += " " + sampled_token
+
+    decoded_caption = decoded_caption.replace("<start>", "")
+    decoded_caption = decoded_caption.replace("<end>", "").strip()
+
+    return {'caption':decoded_caption}
+
+def generate_caption_distill(img_path):
+    caption_model, vectorization = build_model_and_load_weights_distill()
 
     # get index_word and word_index conversion
     vocab = vectorization.get_vocabulary()
@@ -303,6 +357,53 @@ def build_model_and_load_weights_prefix():
     # load model weights
     encoder.load_weights(os.path.join(PREFIX_MODEL_PATH,"encoder.h5"))
     decoder.load_weights(os.path.join(PREFIX_MODEL_PATH,"decoder.h5"))
+    caption_model = ImageCaptioningModelPrefix(encoder=encoder, decoder=decoder)
+
+    return caption_model, vectorization
+
+@lru_cache
+def build_model_and_load_weights_distill():
+    ## load saved vectorization
+    vectorization_weight = pickle.load(open(os.path.join(DISTILL_MODEL_PATH,"vectorization_weights.pkl"), "rb"))
+    # Initiate vectorization
+    vectorization = TextVectorization(
+        max_tokens=VOCAB_SIZE,
+        output_mode="int",
+        output_sequence_length=SEQ_LENGTH,
+        standardize=custom_standardization,
+    )
+    # Call `adapt` with some dummy data 
+    vectorization.adapt(tf.data.Dataset.from_tensor_slices(["xyz"]))
+    # Load weights from saved vectorization
+    vectorization.set_weights(vectorization_weight['weights'])
+
+    # initiate a new model
+    encoder = TransformerEncoder(embed_dim=EMBED_DIM, ff_dim=FF_DIM, image_length=IMAGE_LENGTH_DISTILL, 
+                                 num_heads=NUM_HEADS_DISTILL, num_layers=NUM_ENC_LAYERS_DISTILL)
+    decoder = TransformerDecoderPrefix(embed_dim=EMBED_DIM, ff_dim=FF_DIM, 
+                                       num_heads=NUM_HEADS_DISTILL, num_layers=NUM_DEC_LAYERS_DISTILL)
+
+    # USE AN EXAMPLE IMAGE TO CALL THE MODEL
+    # load and embed example image
+    embedded_img = load_and_process_image(EXAMPLE_IMAGE_PATH)   
+    # Pass the image features to the Transformer encoder
+    encoder_output = encoder(embedded_img, training=False)
+    # Generate the caption using the Transformer decoder
+    example_caption = "<start> this is the example caption <end>"
+    tokenized_caption = vectorization([example_caption])[:, :-1]
+    # concatenate dummy tokens for prefix and token
+    seq_prefix = tf.concat([VOCAB_SIZE*tf.ones((tokenized_caption.shape[0], encoder_output.shape[1]),dtype=tf.int64), tokenized_caption],1)
+    # shift to create input and target
+    seq_inp = tokenized_caption[:, :-1]
+    seq_true = seq_prefix[:, 1:]
+    # obtain mask (0 is the pad token)
+    mask = tf.math.not_equal(seq_true, 0)
+    # pass thtought decoder
+    seq_pred = decoder(seq_inp, encoder_output, training=False, mask=mask)
+
+    # load model weights
+    encoder.load_weights(os.path.join(DISTILL_MODEL_PATH,"encoder.h5"))
+    decoder.load_weights(os.path.join(DISTILL_MODEL_PATH,"decoder.h5"))
     caption_model = ImageCaptioningModelPrefix(encoder=encoder, decoder=decoder)
 
     return caption_model, vectorization
