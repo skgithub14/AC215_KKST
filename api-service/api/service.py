@@ -3,10 +3,7 @@ from fastapi import FastAPI, File
 from starlette.middleware.cors import CORSMiddleware
 import asyncio
 from tempfile import TemporaryDirectory
-from api.download_model import download_test_image, download_transformer_model, download_prefix_model, download_rnn_model
-# from api import transformer_model as mdl_t
-# from api import prefix_model as mdl_p
-# from api import RNN_model as mdl_r
+from api.download_model import download_test_image, download_transformer_model, download_prefix_model, download_distilled_prefix_model, download_rnn_model
 from api import model as mdl
 
 
@@ -33,6 +30,7 @@ async def startup():
     download_test_image()
     download_transformer_model()
     download_prefix_model()
+    download_distilled_prefix_model()
     download_rnn_model()
     mdl.load_clip()
     mdl.load_cnn_model()
@@ -76,6 +74,24 @@ async def predict(
 
         # Make prediction
         generated_caption = mdl.generate_caption_prefix(image_path)
+
+    return generated_caption
+
+# Make prediction using the distilled prefix model
+@app.post("/predict_distill")
+async def predict(
+        file: bytes = File(...)
+):
+    print("predict file:", len(file), type(file))
+
+    # Save the image
+    with TemporaryDirectory() as image_dir:
+        image_path = os.path.join(image_dir, "test.png")
+        with open(image_path, "wb") as output:
+            output.write(file)
+
+        # Make prediction
+        generated_caption = mdl.generate_caption_distill(image_path)
 
     return generated_caption
 
