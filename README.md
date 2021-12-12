@@ -61,7 +61,7 @@ The App is then deployed onto Kubernetes Clusters on Google Cloud Platform. We s
 The three key components of the App are
 
 - **api-service**: contains codes for the models and API server
-- **frontend-react**: contains codes for the React frontend
+- **frontend-react**: contains codes for the frontend in React.js
 - **deployment**: contains scripts for deploying the App on Google Cloud Platform (GCP)
 
 ## Setup
@@ -75,9 +75,9 @@ Change directory back to this folder, run `sh docker-shell.sh` or `docker-shell.
 
 Upon startup, it executes the function in `api/download_model.py` to scrape tokenizer and model weights from the GCP bucket into the **persistent-folder** in the parent directory. 
 
-The `/predict` service uses the encoder-decoder transformer model (defined in `api/model.py`) to generate caption of an image, the `/predict_prefix` service uses the prefix transformer model,the `/predict_distill` service uses the prefix transformer model, and the `/predict_rnn` service uses the RNN model.
+The `/predict` service uses the encoder-decoder transformer model (defined in `api/model.py`) to generate caption of an image, the `/predict_prefix` service uses the prefix transformer model, the `/predict_distill` service uses the prefix transformer model, and the `/predict_rnn` service uses the RNN model.
 
-Upon interaction with the front-end, the server takes an upladed image as input and return a dictionary with the generated caption in the form of {'caption': generated_caption}.
+Upon interaction with the frontend, the server takes an upladed image as input and return a dictionary with the generated caption in the form of {'caption': generated_caption}.
 
 
 ### Frontend
