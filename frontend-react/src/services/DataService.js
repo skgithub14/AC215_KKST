@@ -20,6 +20,13 @@ const DataService = {
             }
         });
     },
+    Predict_distill: async function (formData) {
+        return await axios.post(BASE_API_URL + "/predict_distill", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    },
     Predict_RNN: async function (formData) {
         return await axios.post(BASE_API_URL + "/predict_rnn", formData, {
             headers: {
