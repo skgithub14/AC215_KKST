@@ -21,20 +21,20 @@ const Home = (props) => {
 
     const options = [
         {
-          label: "Encoder-decoder transformer",
+          label: "Encoder-decoder transformer model",
           value: "1",
         },
         {
-          label: "Prefix transformer",
+          label: "Prefix transformer model",
           value: "2",
         },
         {
           label: "Distilled prefix transformer model",
-          value: "4",
+          value: "3",
         },
         {
           label: "RNN with attention (baseline model)",
-          value: "3",
+          value: "4",
         },
       ];
  
@@ -75,6 +75,12 @@ const Home = (props) => {
                     setPrediction(response.data);
                 })
             } else if (model_type==="3") {
+                DataService.Predict_distill(imageData)
+                .then(function (response) {
+                    console.log(response.data);
+                    setPrediction(response.data);
+                })
+            } else if (model_type==="4") {
                 DataService.Predict_RNN(imageData)
                 .then(function (response) {
                     console.log(response.data);
