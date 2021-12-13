@@ -29,6 +29,10 @@ const Home = (props) => {
           value: "2",
         },
         {
+          label: "Distilled prefix transformer model",
+          value: "4",
+        },
+        {
           label: "RNN with attention (baseline model)",
           value: "3",
         },
