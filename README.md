@@ -215,6 +215,7 @@ ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_st
       ├── LICENSE
       ├── README.md
       ├── api-service
+      │   └── api
       ├── frontend-react
       ├── deployment
       ├── persistent-folder
