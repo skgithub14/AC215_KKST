@@ -1,7 +1,7 @@
 AC215-KKST
 ==============================
 
-This is the repository for the final project of Harvard AC215 - Advanced Practical Data Science (DevOps for Deep Learning), Fall 2021. 
+This is the repository for the final project of [Harvard AC215 - Advanced Practical Data Science (DevOps for Deep Learning), Fall 2021](https://harvard-iacs.github.io/2021-AC215/). 
 
 ### Team Members
 - Shih-Yi Tseng
