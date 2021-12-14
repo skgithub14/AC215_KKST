@@ -225,14 +225,14 @@ ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_st
       │   ├── milestone2_KKST
       │   ├── milestone3_KKST
       │   └── milestone4_KKST
-      ├── archive
-      │   ├── api-baseline
-      │   ├── frontend-simple
-      │   ├── data 
-      │   ├── references
-      │   ├── requirements.txt
-      │   ├── setup.py
-      │   └── test_project.py
+      └── archive
+          ├── api-baseline
+          ├── frontend-simple
+          ├── data 
+          ├── references
+          ├── requirements.txt
+          ├── setup.py
+          └── test_project.py
 
 --------
 
