@@ -213,28 +213,26 @@ ansible-playbook deploy-k8s-cluster.yml -i inventory.yml --extra-vars cluster_st
 ------------
       .
       ├── LICENSE
-      ├── Makefile
       ├── README.md
       ├── api-service
       ├── frontend-react
       ├── deployment
-      ├── api-baseline
-      ├── frontend-simple
-      ├── data
       ├── models
       ├── notebooks
-      ├── references
-      ├── requirements.txt
-      ├── setup.py
       ├── src
-      │   ├── __init__.py
-      │   └── build_features.py
       ├── submissions
       │   ├── milestone1_KKST
       │   ├── milestone2_KKST
       │   ├── milestone3_KKST
       │   └── milestone4_KKST
-      └── test_project.py
+      ├── archive
+      │   ├── api-baseline
+      │   ├── frontend-simple
+      │   ├── data 
+      │   ├── references
+      │   ├── requirements.txt
+      │   ├── setup.py
+      │   └── test_project.py
 
 --------
 
