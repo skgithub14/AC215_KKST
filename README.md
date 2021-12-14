@@ -61,6 +61,7 @@ The App is then deployed onto Kubernetes Clusters on Google Cloud Platform. We s
 
 The [**deployment**](https://github.com/skgithub14/AC215_KKST/tree/main/deployment) folder contains scripts for deploying the App on Google Cloud Platform (GCP)
 
+![App demo](src/app_demo.png)
 
 ## Setup
 ### API Server
