@@ -69,7 +69,7 @@ This is how the App looks like:
 
 The **api-service** folder holds the files to set up the Docker container and pipenv virtual environment, as well as Python codes (inside `api` subfolder) for running the API server to serve our image captioning model.
 
-Before running, add the [GCP bucket authorization file](https://github.com/skgithub14/AC215_KKST/blob/main/secrets/bucket-reader.json) into the `secrets` folder in the parent directory, and name the file as `bucket-reader.json`.
+Before running, add the GCP bucket authorization file (from the authors) into the `secrets` folder in the parent directory, and name the file as `bucket-reader.json`.
 
 Change directory back to this folder, run `sh docker-shell.sh` or `docker-shell.bat` to build and start the container, and then run `uvicorn_server` to start the API server at http://localhost:9000.
 
@@ -118,7 +118,7 @@ Once the account is created, make a json key named `deployment.json` and add it 
 
 Once the account is created, make a json key named `gcp-service.json` and add it the the **secrets** folder.
 
-Note that besides these two keys, make sure to put the `bucket-reader.json` [file](https://github.com/skgithub14/AC215_KKST/blob/main/secrets/bucket-reader.json) in the **secrets** folder too.
+Note that besides these two keys, make sure to put the `bucket-reader.json` file in the **secrets** folder too.
 
 #### 3. Set up Docker container for deployment
 Within this folder, run `sh docker-shell.sh` or `docker-shell.bat` in the terminal to build and enter the docker container.
